@@ -7,6 +7,7 @@ import com.amr.project.service.abstracts.ShopShowcaseService;
 import com.amr.project.service.impl.MainPageServiceImpl;
 import org.checkerframework.checker.units.qual.A;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +28,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc()
 //@ActiveProfiles("dev")
 public class MainPageControllerTest {
-    @Autowired
-    private MockMvc mockMvc;
-    @Autowired
-    private MainPageServiceImpl mainPageService;
 
-    @org.junit.Test
+    private MockMvc mockMvc;
+
+    private MainPageServiceImpl mainPageService;
+    @Autowired
+    public MainPageControllerTest(MockMvc mockMvc, MainPageServiceImpl mainPageService) {
+        this.mockMvc = mockMvc;
+        this.mainPageService = mainPageService;
+    }
+
+    @Test
     public void shouldCreateMock() {
         assertThat(mockMvc).isNotNull();
     }
@@ -42,5 +48,10 @@ public class MainPageControllerTest {
         mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("mainPageDto", mainPageService.getMainPageDto()));
+    }
+
+    @Test
+    void getSalesHistory() {
+
     }
 }

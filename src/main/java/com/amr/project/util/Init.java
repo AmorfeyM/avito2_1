@@ -2,20 +2,23 @@ package com.amr.project.util;
 
 import com.amr.project.model.entity.*;
 import com.amr.project.model.entity.report.SalesHistory;
-import com.amr.project.model.enums.*;
+import com.amr.project.model.enums.Gender;
+import com.amr.project.model.enums.PersonalDataStatus;
+import com.amr.project.model.enums.Roles;
+import com.amr.project.model.enums.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.PostConstruct;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import javax.annotation.PostConstruct;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 @Component
 public class Init {
@@ -45,7 +48,6 @@ public class Init {
         createCouponAndDiscount(entityManager);
         createSalesHistory(entityManager);
         createChat(entityManager);
-//        createBill(entityManager);
 
         createBasket(entityManager);
         entityManager.close();
@@ -631,7 +633,6 @@ public class Init {
         Item item1 = entityManager.find(Item.class, 4L);
         Item item2 = entityManager.find(Item.class, 7L);
 
-        //order.setGrandTotal(item2.getPrice().add(item1.getPrice()));
         order.setGrandTotal(BigDecimal.valueOf(1));
 
         List<Item> items = new ArrayList<>();

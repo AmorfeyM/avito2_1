@@ -5,7 +5,6 @@ import com.amr.project.dao.UserRepository;
 import com.amr.project.dao.abstracts.UserDao;
 import com.amr.project.model.dto.UserDto;
 import com.amr.project.model.entity.AuthenticationProvider;
-import com.amr.project.model.entity.Basket;
 import com.amr.project.model.entity.User;
 import com.amr.project.model.enums.Roles;
 import com.amr.project.service.abstracts.MailService;
