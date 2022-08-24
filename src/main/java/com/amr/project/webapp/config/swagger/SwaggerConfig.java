@@ -8,12 +8,12 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 import java.util.ArrayList;
 
-//@Configuration
-//@EnableSwagger2
+@Configuration
+@EnableSwagger2WebMvc
 public class SwaggerConfig {
     @Bean
     public Docket api() {
@@ -34,7 +34,7 @@ public class SwaggerConfig {
                 new Contact("Jon","/api/swagger","name@mail.com"),
                 "",
                 "",
-                new ArrayList()
+                new ArrayList<>()
         );
     }
 }
