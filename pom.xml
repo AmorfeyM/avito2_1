@@ -25,6 +25,7 @@
         <com.paypal.sdk.version>1.4.2</com.paypal.sdk.version>
     </properties>
 
+<!--    Необходимо для работы QIWI оплаты! Ошибка на стороне кивисервера, приходится использовать сторонний репо-->
     <repositories>
         <repository>
             <id>bill-payments-mvn-repo</id>
@@ -210,37 +211,24 @@
             <version>1.31.0</version>
             <scope>test</scope>
         </dependency>
-
-        <dependency>
-            <groupId>com.paypal.sdk</groupId>
-            <artifactId>rest-api-sdk</artifactId>
-            <version>1.4.2</version>
-        </dependency>
         <dependency>
             <groupId>com.stripe</groupId>
             <artifactId>stripe-java</artifactId>
             <version>20.1.0</version>
         </dependency>
-        <dependency>
-            <groupId>org.javamoney</groupId>
-            <artifactId>moneta</artifactId>
-            <version>1.1</version>
-        </dependency>
+
         <dependency>
             <groupId>io.springfox</groupId>
-            <artifactId>springfox-boot-starter</artifactId>
-            <version>3.0.0</version>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.10.5</version>
         </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>3.0.0</version>
-        </dependency>
+<!--Для подключения к АПИ QIWI для создания счетов на оплату-->
         <dependency>
             <groupId>com.qiwi</groupId>
             <artifactId>bill-payments-java-sdk</artifactId>
             <version>1.5.1</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.restdocs</groupId>
             <artifactId>spring-restdocs-mockmvc</artifactId>
@@ -281,6 +269,7 @@
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
         </dependency>
+
         <!-- кодирование пароля в проперти файле -->
         <dependency>
             <groupId>com.github.ulisesbocchio</groupId>
