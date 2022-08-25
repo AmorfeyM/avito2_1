@@ -43,7 +43,7 @@ public class SalesShopReportRestControllerTest {
 
     @Test
     public void shouldReturnSalesByDate() throws Exception {
-        mockMvc.perform(get("/api/sales/date/{id}/{date}", "1", "2022-08-03")) //была ошибка в дате продажи. Поставили реальную дату
+        mockMvc.perform(get("/api/sales/date/{id}/{date}", "1", "2022-08-25"))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(jsonPath("$.sales[0].item").value("Galaxy S22 Ultra"))
@@ -53,7 +53,7 @@ public class SalesShopReportRestControllerTest {
 
     @Test
     public void shouldReturnSalesByVariousDates() throws Exception {
-        mockMvc.perform(get("/api/sales/filterByDate/{id}/{date1}/{date2}", "1", "2022-06-1", "2022-08-30"))//была ошибка в дате продажи. Увеличили диапазон дат
+        mockMvc.perform(get("/api/sales/filterByDate/{id}/{date1}/{date2}", "1", "2022-06-1", "2022-08-30"))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(jsonPath("$.sales[0].item").value("Galaxy S22 Ultra"))
