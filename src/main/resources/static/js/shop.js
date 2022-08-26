@@ -2,7 +2,7 @@
 
 let addForm = document.querySelector('#addShopForm');
 addForm.addEventListener('submit', (e) => {
-        let reader = new FileReader();
+    let reader = new FileReader();
         let file = document.getElementById('shopLogo').files[0];
         reader.readAsArrayBuffer(file);
         e.preventDefault();
