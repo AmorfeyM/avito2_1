@@ -26,11 +26,11 @@ addForm.addEventListener('submit', (e) => {
                             isMain: logoCheck,
                         },
                         location: {
-                            name: document.getElementById('shopCity').value,
+                            id: document.getElementById('shopCity').value,
                             countryName: document.getElementById('shopCountry').value,
                         },
                         addressDetails: {
-                            city: document.getElementById('shopCity').value,
+                            cityId: document.getElementById('shopCity').value,
                             cityIndex: document.getElementById('shopIndex').value,
                             street: document.getElementById('shopStreet').value,
                             house: document.getElementById('shopHouse').value,
