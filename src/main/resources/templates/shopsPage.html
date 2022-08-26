@@ -170,6 +170,7 @@
                         </div>
                     </div>
                 </ul>
+                <button th:if="${#authorization.expression('isAuthenticated()')}" type="button" onclick="location.href='/shop/registration'" class="default">Создать свой</button>
             </div>
         </div>
     </div>
