@@ -1,12 +1,19 @@
 package com.amr.project;
 
 import com.amr.project.model.entity.Shop;
+import com.amr.project.model.entity.User;
+import com.amr.project.model.enums.Roles;
 import com.amr.project.service.abstracts.ShopService;
+import com.amr.project.service.abstracts.UserService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -20,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest()
 @AutoConfigureMockMvc()
 class ShopRegistrationControllerTest {
 
@@ -28,6 +35,20 @@ class ShopRegistrationControllerTest {
     private MockMvc mockMvc;
     @Autowired
     private ShopService shopService;
+    @Autowired
+    private UserService userService;
+
+    @BeforeEach
+    public void init() {
+        User user = new User();
+
+        user.setRole(Roles.USER);
+        SecurityContextHolder.getContext().setAuthentication(
+                new UsernamePasswordAuthenticationToken(
+                        user,
+                        "secret", user.getAuthorities()));
+        Mockito.when(userService.findByUsername(Mockito.anyString())).thenReturn(user);
+    }
 
     @Test
     void shouldShowShopRegistrationPage() throws Exception {
