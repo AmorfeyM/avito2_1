@@ -11,7 +11,7 @@ public class ShopDaoImp extends ReadWriteDaoImpl<Shop, Long> implements ShopDao 
 
     @Override
     public List<Shop> getSixMostPopularShop() {
-        return em.createQuery("select s from Shop s order by s.rating DESC")
+        return em.createQuery("from Shop where (isModerateAccept = 1 AND isPretendedToBeDeleted = 0) ORDER BY rating DESC")
                 .setMaxResults(6).getResultList();
     }
 
@@ -48,7 +48,7 @@ public class ShopDaoImp extends ReadWriteDaoImpl<Shop, Long> implements ShopDao 
 
     @Override
     public List<Shop> getAllShops() {
-        return em.createQuery("select s from Shop s order by s.rating DESC").getResultList();
+        return em.createQuery("from Shop where (isModerateAccept = 1 AND isPretendedToBeDeleted = 0) ORDER BY rating DESC").getResultList();
     }
 }
 
