@@ -122,7 +122,11 @@ public class Shop implements Serializable {
     private List<Favorite> favorites;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,
+            cascade = {CascadeType.MERGE,
+                    CascadeType.PERSIST,
+                    CascadeType.REFRESH,
+                    CascadeType.DETACH})
     @ToString.Exclude
     private Address address;
 
