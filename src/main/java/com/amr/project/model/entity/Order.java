@@ -1,12 +1,14 @@
 package com.amr.project.model.entity;
 
 import com.amr.project.model.enums.Status;
+import com.amr.project.util.mailsender.OrderMailSender;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
+import reactor.core.publisher.Mono;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -50,6 +52,13 @@ public class Order {
     @Column(name = "status")
     private Status status;//статус заказа
 
+    public void setStatus(Status status) {
+        this.status = status;
+        Mono.just(this)
+                .filter(o -> o.getId() != null)
+                .subscribe(OrderMailSender::changeStatusMail);
+    }
+
     @ManyToOne(fetch = FetchType.LAZY)
     @ToString.Exclude
     private User user;
@@ -74,7 +83,6 @@ public class Order {
     }
 
     // колличество по позиции в заказе (ItemId:Count)
-    //@EnoughToLock
     @ToString.Exclude
     @ElementCollection
     @CollectionTable(name="order_position_count",

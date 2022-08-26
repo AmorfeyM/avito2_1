@@ -6,12 +6,14 @@ import com.amr.project.model.dto.OrderDto;
 import com.amr.project.model.entity.*;
 import com.amr.project.model.enums.Status;
 import com.amr.project.service.abstracts.*;
+import com.amr.project.util.mailsender.OrderMailSender;
 import com.amr.project.util.validation.basket.OnAdd;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
+import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
@@ -100,6 +102,7 @@ public class OrderServiceImpl extends ReadWriteServiceImpl<Order, Long> implemen
                     .build();
             order.setQiwiId(UUID.randomUUID().toString());
             super.persist(order);
+            Mono.just(order).subscribe(OrderMailSender::changeStatusMail);
 
             //basketService.clear(user.getId()); // todo - makeev clean basket here if it's need
 

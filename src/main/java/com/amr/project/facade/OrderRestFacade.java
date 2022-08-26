@@ -3,6 +3,7 @@ package com.amr.project.facade;
 import java.math.BigDecimal;
 import java.util.Calendar;
 
+import com.amr.project.util.mailsender.OrderMailSender;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +20,8 @@ import com.amr.project.service.impl.OrderServiceImpl;
 import com.amr.project.webapp.controller.OrderRestController;
 import com.qiwi.billpayments.sdk.client.BillPaymentClient;
 import com.qiwi.billpayments.sdk.model.out.BillResponse;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Service
 @Transactional
@@ -120,15 +123,10 @@ public class OrderRestFacade {
                 orderService.delete(order);
                 return;
             }
-            String message = String.format("Уважамый ,%s! \n" +
-                            "Ваш заказ № %s на сайте Avito, был удален в связи \n" +
-                            "с отсутствием оплаты в течение %s часов \n" +
-                            "держитесь там и хорошего вам настроения!",
-                    name, order.getId(), Order.EXPIRATION_HOURS);
-            mailService.send(email, "Order delete in Avito 2.0", message);
-            logger.info("Order id: {}, was deleted by schedule - not paid", order.getId());
+            Mono.just(order).subscribe(OrderMailSender::deleteMail);
             orderService.unlockItemsRests(orderMapper.toDto(order));
             orderService.delete(order);
+            logger.info("Order id: {}, was deleted by schedule - not paid", order.getId());
         });
     }
 }

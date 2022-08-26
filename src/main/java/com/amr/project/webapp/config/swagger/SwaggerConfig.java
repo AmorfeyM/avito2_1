@@ -1,6 +1,5 @@
 package com.amr.project.webapp.config.swagger;
-
-import com.amr.project.model.entity.*;
+import com.amr.project.model.entity.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.PathSelectors;
@@ -19,6 +18,7 @@ public class SwaggerConfig {
     @Bean
     public Docket api() {
         return  new Docket(DocumentationType.SWAGGER_2)
+                .enable(true)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.amr.project"))
                 .paths(PathSelectors.any())
@@ -36,7 +36,7 @@ public class SwaggerConfig {
                 new Contact("Jon","/api/swagger","name@mail.com"),
                 "",
                 "",
-                new ArrayList()
+                new ArrayList<>()
         );
     }
 }
