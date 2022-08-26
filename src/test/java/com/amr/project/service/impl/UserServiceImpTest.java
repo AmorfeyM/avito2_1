@@ -5,28 +5,31 @@ import com.amr.project.model.entity.User;
 import com.amr.project.model.enums.Roles;
 import com.amr.project.service.abstracts.MailService;
 import com.amr.project.service.abstracts.UserService;
+import com.amr.project.util.mailsender.OrderMailSender;
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.contains;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-@RunWith(SpringRunner.class)
+//@RunWith(SpringRunner.class)
 @SpringBootTest
-class UserServiceImpTest {
+public class UserServiceImpTest {
 
     @Autowired
     private UserService userService;
 
     @MockBean
     private MailService mailService;
+    @MockBean
+    private OrderMailSender orderMailSender;
 
     @Test
     public void testActivate() {
