@@ -46,7 +46,7 @@ public class UserDaoImp extends ReadWriteDaoImpl<User,Long> implements UserDao {
 
     @Override
     public User findByUserName(String username) {
-       return Util.getSingleResult(em.createQuery("select u from User u where u.username=:username",User.class)
+       return Util.getSingleResult(em.createQuery("select u from User u where u.username=:username or u.email=:username",User.class)
                 .setParameter("username",username));
     }
 
