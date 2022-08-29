@@ -39,6 +39,17 @@
 
     <dependencies>
 
+<!--        &lt;!&ndash; https://mvnrepository.com/artifact/io.swagger.core.v3/swagger-annotations &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>io.swagger.core.v3</groupId>-->
+<!--            <artifactId>swagger-annotations</artifactId>-->
+<!--            <version>2.2.2</version>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>3.0.0</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jdbc</artifactId>
@@ -235,17 +246,17 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Для OAUTH2 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-oauth2-client</artifactId>
-            <version>2.3.3.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security.oauth.boot</groupId>
-            <artifactId>spring-security-oauth2-autoconfigure</artifactId>
-            <version>2.1.9.RELEASE</version>
-        </dependency>
+<!--        &lt;!&ndash; Для OAUTH2 &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-oauth2-client</artifactId>-->
+<!--            <version>2.3.3.RELEASE</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.security.oauth.boot</groupId>-->
+<!--            <artifactId>spring-security-oauth2-autoconfigure</artifactId>-->
+<!--            <version>2.1.9.RELEASE</version>-->
+<!--        </dependency>-->
 
         <!--для валидации при регистрации        -->
         <dependency>
@@ -303,6 +314,11 @@
 
         <!--Reactor-->
         <dependency> <groupId>io.projectreactor</groupId> <artifactId>reactor-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>3.0.0</version>
         </dependency>
 
     </dependencies>

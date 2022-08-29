@@ -19,7 +19,7 @@ public class SwaggerConfig {
     @Bean
     public Docket api() {
         return  new Docket(DocumentationType.SWAGGER_2)
-                .enable(true)
+//                .enable(true)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.amr.project"))
                 .paths(PathSelectors.any())
