@@ -7,22 +7,7 @@ import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import java.time.LocalDateTime;
+import javax.persistence.*;
 import java.util.*;
 
 @Entity
@@ -89,15 +74,6 @@ public class User implements UserDetails {
     @JoinColumn(name = "personal_data_id", referencedColumnName = "id")
     @ToString.Exclude
     private PersonalData personalData;
-
-  /*  @OneToOne(mappedBy = "user",
-            cascade = {CascadeType.MERGE,
-            CascadeType.PERSIST,
-            CascadeType.REFRESH,
-            CascadeType.DETACH},
-            fetch = FetchType.LAZY, optional = false)
-    @ToString.Exclude
-    private UserInfo userInfo;*/
 
     @OneToOne(mappedBy = "user",
             cascade = {CascadeType.MERGE,

@@ -1,5 +1,6 @@
 package com.amr.project;
 
+import com.amr.project.facade.ShopRegistrationFacade;
 import com.amr.project.model.entity.Shop;
 import com.amr.project.model.entity.User;
 import com.amr.project.model.enums.Roles;
@@ -12,6 +13,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -36,17 +38,20 @@ class ShopRegistrationControllerTest {
     @Autowired
     private ShopService shopService;
     @Autowired
+    ShopRegistrationFacade shopRegistrationFacade;
+    @MockBean
     private UserService userService;
 
     @BeforeEach
     public void init() {
         User user = new User();
-
+        user.setId(10L);
         user.setRole(Roles.USER);
+        user.setPassword("secret");
         SecurityContextHolder.getContext().setAuthentication(
                 new UsernamePasswordAuthenticationToken(
                         user,
-                        "secret", user.getAuthorities()));
+                        user.getPassword(), user.getAuthorities()));
         Mockito.when(userService.findByUsername(Mockito.anyString())).thenReturn(user);
     }
 

@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.Calendar;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -22,9 +23,13 @@ public class SalesHistoryDaoTest {
     @Test
     public void findSalesHistoryFromOrderByShopIdTest() {
         for (SalesHistory history : salesHistoryDao.findSalesHistoryFromOrderByShopId(1L)) {
-            assertThat(history.getItem().getShop().getId()).isEqualTo(1);
-            assertThat(history.getItem().getOrders().stream().allMatch(e -> e.getStatus().equals(Status.SENT)))
-                    .isEqualTo(true);
+            assertAll(
+                    () -> assertThat(history.getItem().getShop().getId()).isEqualTo(1),
+                    () -> assertThat(history.getItem().getOrders().stream().allMatch(e -> e.getStatus().equals(Status.SENT)))
+                            .isEqualTo(true)
+            );
+
+
         }
     }
 
@@ -35,11 +40,14 @@ public class SalesHistoryDaoTest {
         date1.set(2022, Calendar.JUNE, 16, 1, 0);
         date2.set(2022, Calendar.JUNE, 16, 23, 0);
         for (SalesHistory history : salesHistoryDao.findSalesByDate(1L, date1, date2)) {
-            assertThat(history.getOrderDate().after(date1)).isEqualTo(true);
-            assertThat(history.getOrderDate().before(date2)).isEqualTo(true);
-            assertThat(history.getItem().getShop().getId()).isEqualTo(1);
-            assertThat(history.getItem().getOrders().stream().allMatch(e -> e.getStatus().equals(Status.SENT)))
-                    .isEqualTo(true);
+            assertAll(
+                    () -> assertThat(history.getOrderDate().after(date1)).isEqualTo(true),
+                    () -> assertThat(history.getOrderDate().before(date2)).isEqualTo(true),
+                    () -> assertThat(history.getItem().getShop().getId()).isEqualTo(1),
+                    () -> assertThat(history.getItem().getOrders().stream().allMatch(e -> e.getStatus().equals(Status.SENT)))
+                    .isEqualTo(true)
+            );
+
         }
     }
 
@@ -47,10 +55,12 @@ public class SalesHistoryDaoTest {
     public void findSalesByItemNameTest() {
         String itemName = "Galaxy S20 Ultra";
         for (SalesHistory history : salesHistoryDao.findSalesByItemName(1L, itemName)) {
-            assertThat(history.getItem().getName()).isEqualTo(itemName);
-            assertThat(history.getItem().getShop().getId()).isEqualTo(1);
-            assertThat(history.getItem().getOrders().stream().allMatch(e -> e.getStatus().equals(Status.SENT)))
-                    .isEqualTo(true);
+            assertAll(
+                    () -> assertThat(history.getItem().getName()).isEqualTo(itemName),
+                    () -> assertThat(history.getItem().getShop().getId()).isEqualTo(1),
+                    () -> assertThat(history.getItem().getOrders().stream().allMatch(e -> e.getStatus().equals(Status.SENT)))
+                    .isEqualTo(true)
+            );
         }
     }
 
