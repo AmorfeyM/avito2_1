@@ -8,6 +8,7 @@ import com.amr.project.model.entity.User;
 import com.amr.project.service.abstracts.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,7 @@ public class ShopRegistrationRestController {
     }
 
     // TODO перед сохранением в БД отправлять запрос на регистрацию модератору
-    @PostMapping()
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> registerNewShop(@AuthenticationPrincipal User user, @RequestBody ShopDto shopDto) {
         shopDto.setUserId(user.getId());
         Shop newShop = shopMapper.toModel(shopDto);
