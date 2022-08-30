@@ -41,7 +41,7 @@ public class SalesShopReportRestControllerTest {
 
     @Test
     public void shouldReturnSalesByDate() throws Exception {
-        mockMvc.perform(get("/api/sales/date/{id}/{date}", "1", "2022-08-26"))
+        mockMvc.perform(get("/api/sales/date/{id}/{date}", "1", "2022-08-29"))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(jsonPath("$.sales[0].item").value("Galaxy S22 Ultra"))
